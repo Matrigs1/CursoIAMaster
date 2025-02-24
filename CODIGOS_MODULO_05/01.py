@@ -4,7 +4,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = ''
 
 # Modelo da LLM.
 model = ChatOpenAI(
