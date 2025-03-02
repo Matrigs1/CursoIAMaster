@@ -1,8 +1,8 @@
 import os
+from decouple import config
 from langchain_openai import OpenAI, ChatOpenAI
 
-
-os.environ['OPENAI_API_KEY'] = 'SUA CHAVE DE API'
+os.environ['OPENAI_API_KEY'] = config('OPENAI_API_KEY')
 
 model = OpenAI()
 

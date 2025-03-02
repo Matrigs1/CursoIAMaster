@@ -1,10 +1,10 @@
 import os
+from decouple import config
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-
-os.environ['OPENAI_API_KEY'] = 'SUA CHAVE DE API'
+os.environ['OPENAI_API_KEY'] = config('OPENAI_API_KEY')
 
 model = ChatOpenAI(model='gpt-3.5-turbo')
 

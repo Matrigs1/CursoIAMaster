@@ -1,4 +1,5 @@
 import os
+from decouple import config
 from langchain import hub
 from langchain.agents import Tool, create_react_agent, AgentExecutor
 from langchain.prompts import PromptTemplate
@@ -6,8 +7,7 @@ from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_experimental.utilities import PythonREPL
 from langchain_openai import ChatOpenAI
 
-
-os.environ['OPENAI_API_KEY'] = 'SUA CHAVE DE API'
+os.environ['OPENAI_API_KEY'] = config('OPENAI_API_KEY')
 
 model = ChatOpenAI(model='gpt-3.5-turbo')
 

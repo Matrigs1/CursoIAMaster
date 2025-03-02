@@ -1,1 +1,31 @@
-Nova chave API = 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
+Variáveis de ambiente:
+Para utilizar de forma fácil, podemos instalar o módulo decouple e, importar a sua função config. Criamos um arquivo .env e, onde quisermos utilizar a variável, é só chamar a função
+config do módulo com o nome da variável que está no arquivo .env.
+
+Como executar RAG's com vector stores:
+1. Fazemos load dos dados (pdf, excel, banco de dados, API etc).
+2. Precisamos criar um split com o RecursiveCharacterTextSplitter (recebe chunk_size e chunk_overlap),
+    para que possa receber nossos dados.
+3. Após criado o objeto e setada as configs, chamamos o split_documents e, enviamos os dados.
+4. Aí criamos uma instância do OpenAIEmbeddings.
+5. Finalmente criamos o nosso vector store, a partir do Chroma.from_documents, que recebe: documents(chunks), o embedding e, podemos dar um nome.
+A partir daqui, temos os inputs e outputs:
+6. Criamos um retriever, que busca as informações do vector store.
+7. O próximo passo é criar uma rag_chain. O que ela recebe: 
+    context(retriever), question(RunnablePassthrough para ser input),
+    prompt, model e, StrOutPutParser, esses três com o pipe da chain.
+8. Se quisermos uma interação mais ilimitada, podemos criar um loop para o usuário ir perguntando, até que não queira mais.
+    Ele vai consistir em: input, rag_chain.invoke(input), print da resposta.
+
+Trabalhando com um vector store já criado:
+Depois de criado, o processo para consumir esse vector store de forma eficiente é similar.
+Criamos o modelo, a instância do embedding e, o passo mais importante = Instanciamos o Chroma, passando o diretório do nosso db (vector store persistido), o embedding e, o nome da coleção que desejamos fazer o retrive.
+Após criado o retriever, podemos criar prompts, orientando a IA e, enviar inputs humanos.
+Para facilitar a interação, importamos chains de alguns módulos úteis: 'create_stuff_documents_chain', que recebe o model e o prompt;
+E a 'create_retrieval_chain', que vai receber o nosso retriever e a chain criada anteriormente de answer.
+Depois disso é simples, fazer o invoke com o input do usuário.
+
+Existe uma opção para gerar vector stores dentro da própria interface web da OpenAI. Lá, você pode fazer update do arquivo que deseja e configurar o assistente da maneira que achar melhor,
+inclusive, interagir com ele lá.
+
+É possível utilizar o streamlit para criar interfaces gráficas simples pro usuário fazer a interação com o modelo de LLM.

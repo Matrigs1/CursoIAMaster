@@ -1,4 +1,5 @@
 import os
+from decouple import config
 from langchain import hub
 from langchain.agents import create_react_agent, AgentExecutor
 from langchain.prompts import PromptTemplate
@@ -6,8 +7,7 @@ from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 from langchain_openai import ChatOpenAI
 
-
-os.environ['OPENAI_API_KEY'] = 'SUA CHAVE DE API'
+os.environ['OPENAI_API_KEY'] = config('OPENAI_API_KEY')
 
 model = ChatOpenAI(model='gpt-4-turbo')
 
